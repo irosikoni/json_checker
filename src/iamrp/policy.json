@@ -6,8 +6,12 @@
       {
         "Sid": "IamListAccess",
         "Effect": "Allow",
-        "Action": ["iam:ListRoles", "iam:ListUsers"],
-        "Resource": "*sdfsd"
+        "Action": ["iam:ListRoles", "iam:ListUsers"]
+      },
+      {
+        "Sid": "IamListAccess",
+        "Effect": "Allow",
+        "Action": ["iam:ListRoles", "iam:ListUsers"]
       }
     ]
   }
