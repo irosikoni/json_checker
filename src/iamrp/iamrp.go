@@ -1,4 +1,4 @@
-package main
+package iamrp
 
 import (
 	"encoding/json"
@@ -24,8 +24,7 @@ type IAMRolePolicy struct {
 	PolicyDocument PolicyDocument
 }
 
-func main(){
-	filepath := os.Args[1]
+func IAMRolePolicyValidator(filepath string){
 	policy := loadAndParseJSON(filepath)
 	fmt.Println(policy.isResourceAsterisk())
 }
