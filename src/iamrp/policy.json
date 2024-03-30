@@ -7,6 +7,11 @@
         "Sid": "IamListAccess",
         "Effect": "Allow",
         "Action": ["iam:ListRoles", "iam:ListUsers"]
+      },
+      {
+        "Sid": "IamListAccess",
+        "Effect": "Allow",
+        "Action": ["iam:ListRoles", "iam:ListUsers"]
       }
     ]
   }

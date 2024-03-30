@@ -49,6 +49,12 @@ func loadAndParseJSON(filepath string) IAMRolePolicy{
 }
 
 func (policy IAMRolePolicy) isResourceAsterisk() bool{
+	if len(policy.PolicyDocument.Statement) == 0 {
+		panic("No resource field in the policy")
+	}
+	if len(policy.PolicyDocument.Statement) > 1 {
+		panic("Multi-statement policy, cannot validate exact resource field")
+	}
 	return policy.PolicyDocument.Statement[0].Resource != "*"
 }
 
