@@ -15,7 +15,7 @@ go build ./src/main
 and after that:
 
 ```bash
-./main <filepath to your file>
+./main <filepath to your json file>
 ```
 
 To run tests, do:
