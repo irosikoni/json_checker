@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/irosikoni/json_checker/src/iamrp"
+	"github.com/irosikoni/json_checker/src/policy"
 )
-func main(){
+
+func main() {
 	filepath := os.Args[1]
-	fmt.Println(iamrp.IAMRolePolicyValidator(filepath))
+	fmt.Println(policy.IAMRolePolicyValidator(filepath))
 }

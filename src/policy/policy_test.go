@@ -1,4 +1,4 @@
-package iamrp
+package policy
 
 import (
 	"testing"
@@ -11,9 +11,9 @@ func TestIsResourceAsterisk(t *testing.T) {
 			Version: "",
 			Statement: []Statement{
 				{
-					Sid: "",
-					Effect: "",
-					Action: []string{""},
+					Sid:      "",
+					Effect:   "",
+					Action:   []string{""},
 					Resource: "*",
 				},
 			},
@@ -22,7 +22,7 @@ func TestIsResourceAsterisk(t *testing.T) {
 	badPolicy := goodPolicy
 	badPolicy.PolicyDocument.Statement[0].Resource = "*sth"
 
-	t.Run("Positive", func(t *testing.T){
+	t.Run("Positive", func(t *testing.T) {
 		if goodPolicy.isResourceAsterisk() {
 			t.Log("Founding asterisk resulted in True")
 		}
@@ -36,9 +36,8 @@ func TestIsResourceAsteriskSub(t *testing.T) {
 	policyWithMissingResource := IAMRolePolicy{
 		PolicyName: "",
 		PolicyDocument: PolicyDocument{
-			Version: "",
-			Statement: []Statement{
-			},
+			Version:   "",
+			Statement: []Statement{},
 		},
 	}
 	policyWithTooManyStatements := IAMRolePolicy{
@@ -47,22 +46,22 @@ func TestIsResourceAsteriskSub(t *testing.T) {
 			Version: "",
 			Statement: []Statement{
 				{
-					Sid: "",
-					Effect: "",
-					Action: []string{""},
+					Sid:      "",
+					Effect:   "",
+					Action:   []string{""},
 					Resource: "*",
 				},
 				{
-					Sid: "",
-					Effect: "",
-					Action: []string{""},
+					Sid:      "",
+					Effect:   "",
+					Action:   []string{""},
 					Resource: "*",
 				},
 			},
 		},
 	}
 
-	t.Run("Error checking - missing resource", func(t *testing.T){
+	t.Run("Error checking - missing resource", func(t *testing.T) {
 		defer func() {
 			if recovered := recover(); recovered != nil {
 				t.Log("Error checking for missing resource field")
@@ -70,7 +69,7 @@ func TestIsResourceAsteriskSub(t *testing.T) {
 		}()
 		policyWithMissingResource.isResourceAsterisk()
 	})
-	t.Run("Error checking - too many statements", func(t *testing.T){
+	t.Run("Error checking - too many statements", func(t *testing.T) {
 		defer func() {
 			if recovered := recover(); recovered != nil {
 				t.Log("Error checking for multi-statement policy")

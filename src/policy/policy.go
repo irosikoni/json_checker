@@ -1,4 +1,4 @@
-package iamrp
+package policy
 
 import (
 	"bytes"
@@ -6,38 +6,37 @@ import (
 	"os"
 )
 
-
 type Statement struct {
-	Sid string
-	Effect string
+	Sid       string
+	Effect    string
 	Principal map[string]string
-	Action []string
-	Resource string
+	Action    []string
+	Resource  string
 	Condition map[string]map[string]string
 }
 
 type PolicyDocument struct {
-	Version string
+	Version   string
 	Statement []Statement
 }
 
 type IAMRolePolicy struct {
-	PolicyName string
+	PolicyName     string
 	PolicyDocument PolicyDocument
 }
 
-func IAMRolePolicyValidator(filepath string) bool{
+func IAMRolePolicyValidator(filepath string) bool {
 	policy := loadAndParseJSON(filepath)
 	return policy.isResourceAsterisk()
 }
 
-func loadAndParseJSON(filepath string) IAMRolePolicy{
+func loadAndParseJSON(filepath string) IAMRolePolicy {
 	content, loadingErr := os.ReadFile(filepath)
 	if loadingErr != nil {
 		if os.IsNotExist(loadingErr) {
 			panic("File does not exist")
 		} else {
-		panic(loadingErr)
+			panic(loadingErr)
 		}
 	}
 	var parsedPolicy IAMRolePolicy
@@ -48,7 +47,7 @@ func loadAndParseJSON(filepath string) IAMRolePolicy{
 	return parsedPolicy
 }
 
-func (policy IAMRolePolicy) isResourceAsterisk() bool{
+func (policy IAMRolePolicy) isResourceAsterisk() bool {
 	if len(policy.PolicyDocument.Statement) == 0 {
 		panic("No resource field in the policy")
 	}
@@ -63,4 +62,3 @@ func StrictUnmarshal(data []byte, v interface{}) error {
 	dec.DisallowUnknownFields()
 	return dec.Decode(v)
 }
-

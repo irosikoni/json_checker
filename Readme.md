@@ -21,19 +21,5 @@ and after that:
 To run tests, do:
 
 ```bash
-go test ./src/iamrp
-```
-
-In case you would like to use the validating function in your project, you can import it into your module, add
-
-```go
-import (
-github.com/irosikoni/json_checker/src/iamrp
-)
-```
-
-to your package, and then use a function like that:
-
-```go
-iamrp.IAMRolePolicyValidator(<your filepath>)
+go test ./src/policy
 ```
